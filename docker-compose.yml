@@ -2,6 +2,8 @@ version: "3.8"
 services:
   mongodb:
     container_name: mongo
+    deploy:
+      replicas: 3  # Creates 3 replicas of the backend container
     image: mongo:latest
     volumes:
       - ./backend/data:/data
@@ -10,6 +12,8 @@ services:
 
   backend:
     container_name: backend
+    deploy:
+      replicas: 3  # Creates 3 replicas of the backend container
     build: ./backend
     env_file:
       - ./backend/.env.docker
@@ -20,6 +24,8 @@ services:
 
   frontend:
     container_name: frontend
+    deploy:
+      replicas: 2  # Creates 3 replicas of the backend container
     build: ./frontend
     env_file:
       - ./frontend/.env.docker
@@ -28,6 +34,8 @@ services:
 
   redis:
     container_name: redis
+    deploy:
+      replicas: 3  # Creates 3 replicas of the backend container
     restart: unless-stopped
     image: redis:7.0.5-alpine 
     expose:
